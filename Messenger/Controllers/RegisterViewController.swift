@@ -15,11 +15,13 @@ class RegisterViewController: UIViewController {
     private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
     private let registerButton = UIButton()
+    private let viewForAddShadow = UIView()
 
     override func loadView() {
         let view = UIView()
         self.view = view
         view.addSubview(scrollView)
+        scrollView.addSubview(viewForAddShadow)
         scrollView.addSubview(imageView)
         scrollView.addSubview(firstNameTextField)
         scrollView.addSubview(lastNameTextField)
@@ -85,6 +87,9 @@ class RegisterViewController: UIViewController {
                                          width: scrollView.frame.width - 200 - view.safeAreaInsets.left - view.safeAreaInsets.right,
                                          height: 40)
         scrollView.contentSize = CGSize(width: view.bounds.width, height: registerButton.frame.maxY)
+        imageView.layer.cornerRadius = imageView.bounds.width / 2
+        viewForAddShadow.frame = imageView.frame
+        viewForAddShadow.layer.cornerRadius = imageView.bounds.width / 2
     }
 
     @objc private func onRegisterButton() {
@@ -131,14 +136,43 @@ class RegisterViewController: UIViewController {
     }
 
     @objc private func onImageViewGesture() {
-        print("tap")
+        let actionSheet = UIAlertController(title: "Profile picture",
+                                            message: "How would you like to select a picture for your profile?",
+                                            preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cansel",
+                                            style: .cancel ,
+                                            handler: nil ))
+        actionSheet.addAction(UIAlertAction(title: "Take a photo",
+                                            style: .default,
+                                            handler: { [weak self] _ in
+                                                self?.presentImagePickerControler(sourceType: .camera)
+                                            }))
+        actionSheet.addAction(UIAlertAction(title: "Choose a photo",
+                                            style: .default,
+                                            handler: { [weak self] _ in
+                                                self?.presentImagePickerControler(sourceType: .photoLibrary)
+                                            }))
+        present(actionSheet, animated: true)
+    }
+
+    private func presentImagePickerControler(sourceType: UIImagePickerController.SourceType) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = sourceType
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
     }
 
     private func setupUI() {
         view.backgroundColor = .systemBackground
         imageView.image = UIImage(systemName: "person.circle")
-        imageView.contentMode = .scaleAspectFill
         imageView.tintColor = .label
+        imageView.backgroundColor = view.backgroundColor
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.addBorder(width: 2, borderColor: .label)
+        viewForAddShadow.addShadow(color: .label, opacity: 1, offSet: .zero, radius: 10)
+        viewForAddShadow.backgroundColor = view.backgroundColor
         firstNameTextField.backgroundColor = .white
         firstNameTextField.textColor = .black
         firstNameTextField.layer.cornerRadius = 10
@@ -213,3 +247,11 @@ extension RegisterViewController: UITextFieldDelegate {
     }
 }
 
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            imageView.image = selectedImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
