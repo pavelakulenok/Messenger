@@ -51,10 +51,10 @@ class LoginViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
-        imageView.frame = CGRect(x: (view.frame.size.width - 100) / 2,
+        imageView.frame = CGRect(x: (view.frame.size.width - 150) / 2,
                                  y: 30,
-                                 width: 100,
-                                 height: 100)
+                                 width: 150,
+                                 height: 150)
         emailTextField.frame = CGRect(x: 20 + view.safeAreaInsets.right,
                                       y: imageView.frame.maxY + 50,
                                       width: scrollView.frame.width - 40 - view.safeAreaInsets.left - view.safeAreaInsets.right,
@@ -76,7 +76,19 @@ class LoginViewController: UIViewController {
     }
 
     @objc private func onLoginButton() {
-
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text,
+              !email.isEmpty,
+              !password.isEmpty else {
+            showAlertWithOneButton(title: "Woops!",
+                                   message: "Please enter all information to log in.",
+                                   actionTitle: "Ok",
+                                   actionStyle: .default,
+                                   handler: nil)
+            return
+        }
     }
 
     @objc private func adjustForKeyboard(notification: Notification) {
@@ -123,6 +135,7 @@ class LoginViewController: UIViewController {
         emailTextField.textAlignment = .center
         emailTextField.placeholder = "Email adress"
         emailTextField.returnKeyType = .next
+        emailTextField.returnKeyType = .continue
         passwordTextField.autocorrectionType = .no
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
