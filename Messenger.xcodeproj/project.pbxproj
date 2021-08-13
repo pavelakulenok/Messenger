@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D48F726626C6722E00010C08 /* UIViewController+UIAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F726526C6722E00010C08 /* UIViewController+UIAlertVC.swift */; };
 		D496CF8526C52A28007DEDD1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496CF8426C52A28007DEDD1 /* RegisterViewController.swift */; };
 		D496CF8726C52AEA007DEDD1 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496CF8626C52AEA007DEDD1 /* ConversationsViewController.swift */; };
 		D496CF8926C59499007DEDD1 /* UIView+UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496CF8826C59499007DEDD1 /* UIView+UIUtilities.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D48F726526C6722E00010C08 /* UIViewController+UIAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIAlertVC.swift"; sourceTree = "<group>"; };
 		D496CF8426C52A28007DEDD1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D496CF8626C52AEA007DEDD1 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		D496CF8826C59499007DEDD1 /* UIView+UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+UIUtilities.swift"; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 		D496CF8A26C5C571007DEDD1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D48F726526C6722E00010C08 /* UIViewController+UIAlertVC.swift */,
 				D496CF8826C59499007DEDD1 /* UIView+UIUtilities.swift */,
 			);
 			path = Extensions;
@@ -169,6 +172,7 @@
 				D4F1CEDF26C51568003A7D49 /* LoginViewController.swift in Sources */,
 				D496CF8726C52AEA007DEDD1 /* ConversationsViewController.swift in Sources */,
 				D4F1CEDB26C51568003A7D49 /* AppDelegate.swift in Sources */,
+				D48F726626C6722E00010C08 /* UIViewController+UIAlertVC.swift in Sources */,
 				D496CF8926C59499007DEDD1 /* UIView+UIUtilities.swift in Sources */,
 				D4F1CEDD26C51568003A7D49 /* SceneDelegate.swift in Sources */,
 				D496CF8526C52A28007DEDD1 /* RegisterViewController.swift in Sources */,
