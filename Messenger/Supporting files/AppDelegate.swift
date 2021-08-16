@@ -5,8 +5,8 @@
 //  Created by Pavel Akulenak on 12.08.21.
 //
 
-import UIKit
 import Firebase
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

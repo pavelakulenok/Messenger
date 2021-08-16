@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>265991515942-eooe8cm3n9k7vkgtqtsoh3qf44s5q2sp.apps.googleusercontent.com</string>
+	<string>710335895681-fi5nt762nm4js5dmvlphjavntdrej9gq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.265991515942-eooe8cm3n9k7vkgtqtsoh3qf44s5q2sp</string>
+	<string>com.googleusercontent.apps.710335895681-fi5nt762nm4js5dmvlphjavntdrej9gq</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDhr3HnBWom2FMaI1Dn8PdpcNwX9oSjOAU</string>
+	<string>AIzaSyBaHkLJ7WLTAisc2IN8J2uS8-Gqs8TK6Nw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>265991515942</string>
+	<string>710335895681</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>by.paulshark.Messenger</string>
 	<key>PROJECT_ID</key>
-	<string>messenger-92d8c</string>
+	<string>messenger-6787d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>messenger-92d8c.appspot.com</string>
+	<string>messenger-6787d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:265991515942:ios:44c4a1aa764eff6eb4dbe7</string>
+	<string>1:710335895681:ios:c2ce947caaeafd54169580</string>
 </dict>
 </plist>

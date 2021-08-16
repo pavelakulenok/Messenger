@@ -5,6 +5,7 @@
 //  Created by Pavel Akulenak on 12.08.21.
 //
 
+import FirebaseAuth
 import UIKit
 
 class RegisterViewController: UIViewController {
@@ -118,6 +119,16 @@ class RegisterViewController: UIViewController {
                                    actionTitle: "Ok",
                                    actionStyle: .default,
                                    handler: nil)
+        } else {
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { _, error in
+                if let error = error {
+                    self.showAlertWithOneButton(title: "Error", message: "can't create account. Error: \(error)", actionTitle: "Ok", actionStyle: .default, handler: nil)
+                } else {
+                    let vc = ConversationsViewController()
+                    vc.navigationItem.hidesBackButton = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
     }
 

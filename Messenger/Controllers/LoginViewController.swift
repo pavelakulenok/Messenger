@@ -5,6 +5,7 @@
 //  Created by Pavel Akulenak on 12.08.21.
 //
 
+import FirebaseAuth
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -88,6 +89,15 @@ class LoginViewController: UIViewController {
                                    actionStyle: .default,
                                    handler: nil)
             return
+        }
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                self.showAlertWithOneButton(title: "Error", message: "\(error)", actionTitle: "Ok", actionStyle: .default, handler: nil)
+            } else {
+                let vc = ConversationsViewController()
+                vc.navigationItem.hidesBackButton = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 
