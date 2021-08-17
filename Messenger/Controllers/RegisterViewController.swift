@@ -87,13 +87,13 @@ class RegisterViewController: UIViewController {
                                          width: scrollView.frame.width - 40 - view.safeAreaInsets.left - view.safeAreaInsets.right,
                                          height: 40)
         confirmPasswordTextField.frame = CGRect(x: 20 + view.safeAreaInsets.right,
-                                         y: passwordTextField.frame.maxY + 30,
-                                         width: scrollView.frame.width - 40 - view.safeAreaInsets.left - view.safeAreaInsets.right,
-                                         height: 40)
+                                                y: passwordTextField.frame.maxY + 30,
+                                                width: scrollView.frame.width - 40 - view.safeAreaInsets.left - view.safeAreaInsets.right,
+                                                height: 40)
         registerButton.frame = CGRect(x: 100 + view.safeAreaInsets.right,
-                                         y: confirmPasswordTextField.frame.maxY + 30,
-                                         width: scrollView.frame.width - 200 - view.safeAreaInsets.left - view.safeAreaInsets.right,
-                                         height: 40)
+                                      y: confirmPasswordTextField.frame.maxY + 30,
+                                      width: scrollView.frame.width - 200 - view.safeAreaInsets.left - view.safeAreaInsets.right,
+                                      height: 40)
         scrollView.contentSize = CGSize(width: view.bounds.width, height: registerButton.frame.maxY)
         imageView.layer.cornerRadius = imageView.bounds.width / 2
         viewForAddShadow.frame = imageView.frame
@@ -129,12 +129,24 @@ class RegisterViewController: UIViewController {
                                    actionStyle: .default,
                                    handler: nil)
         } else if password != confirmPassword {
-            showAlertWithOneButton(title: "Woops!", message: "your password in the password field does not match the password in the password confirmation field", actionTitle: "Ok", actionStyle: .default, handler: nil)
+            showAlertWithOneButton(title: "Woops!",
+                                   message: "your password in the password field does not match the password in the password confirmation field",
+                                   actionTitle: "Ok",
+                                   actionStyle: .default,
+                                   handler: nil)
         } else {
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { _, error in
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] authDataResult, error in
+                guard let self = self else {
+                    return
+                }
                 if let error = error {
-                    self.showAlertWithOneButton(title: "Error", message: "can't create account. Error: \(error)", actionTitle: "Ok", actionStyle: .default, handler: nil)
-                } else {
+                    self.showAlertWithOneButton(title: "Error",
+                                                message: "\(error.localizedDescription)",
+                                                actionTitle: "Ok",
+                                                actionStyle: .default,
+                                                handler: nil)
+                } else if let result = authDataResult {
+                    DatabaseManager.shared.insertUser(user: User(email: email, firstName: firstName, lastName: lastName, uid: result.user.uid))
                     let vc = ConversationsViewController()
                     vc.navigationItem.hidesBackButton = true
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -152,7 +164,10 @@ class RegisterViewController: UIViewController {
         if notification.name == UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = .zero
         } else {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+            scrollView.contentInset = UIEdgeInsets(top: 0,
+                                                   left: 0,
+                                                   bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom,
+                                                   right: 0)
         }
         scrollView.scrollIndicatorInsets = scrollView.contentInset
     }
@@ -256,7 +271,6 @@ class RegisterViewController: UIViewController {
         confirmPasswordTextField.textAlignment = .center
         confirmPasswordTextField.placeholder = "Confirm your password"
         confirmPasswordTextField.returnKeyType = .join
-
     }
 
     private func configureNavBar() {

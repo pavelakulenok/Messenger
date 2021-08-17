@@ -90,9 +90,16 @@ class LoginViewController: UIViewController {
                                    handler: nil)
             return
         }
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] _, error in
+            guard let self = self else {
+                return
+            }
             if let error = error {
-                self.showAlertWithOneButton(title: "Error", message: "\(error)", actionTitle: "Ok", actionStyle: .default, handler: nil)
+                self.showAlertWithOneButton(title: "Error",
+                                            message: "\(error.localizedDescription)",
+                                            actionTitle: "Ok",
+                                            actionStyle: .default,
+                                            handler: nil)
             } else {
                 let vc = ConversationsViewController()
                 vc.navigationItem.hidesBackButton = true

@@ -5,6 +5,7 @@
 //  Created by Pavel Akulenak on 12.08.21.
 //
 
+import FirebaseAuth
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -18,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         var vc = UINavigationController()
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-        if isLoggedIn {
+        if let _ = FirebaseAuth.Auth.auth().currentUser {
             vc = UINavigationController(rootViewController: ConversationsViewController())
         } else {
             vc = UINavigationController(rootViewController: LoginViewController())
