@@ -5,7 +5,6 @@
 //  Created by Pavel Akulenak on 12.08.21.
 //
 
-import FirebaseAuth
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -90,7 +89,7 @@ class LoginViewController: UIViewController {
                                    handler: nil)
             return
         }
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] _, error in
+        AuthenticationManager.shared.logIn(email: email, password: password) { [weak self] error in
             guard let self = self else {
                 return
             }

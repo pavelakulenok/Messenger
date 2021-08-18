@@ -5,7 +5,6 @@
 //  Created by Pavel Akulenak on 12.08.21.
 //
 
-import FirebaseAuth
 import UIKit
 
 class RegisterViewController: UIViewController {
@@ -135,7 +134,10 @@ class RegisterViewController: UIViewController {
                                    actionStyle: .default,
                                    handler: nil)
         } else {
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] authDataResult, error in
+            AuthenticationManager.shared.createUser(email: email,
+                                                    password: password,
+                                                    firstName: firstName,
+                                                    lastName: lastName) { [weak self] error in
                 guard let self = self else {
                     return
                 }
@@ -145,8 +147,7 @@ class RegisterViewController: UIViewController {
                                                 actionTitle: "Ok",
                                                 actionStyle: .default,
                                                 handler: nil)
-                } else if let result = authDataResult {
-                    DatabaseManager.shared.insertUser(user: User(email: email, firstName: firstName, lastName: lastName, uid: result.user.uid))
+                } else {
                     let vc = ConversationsViewController()
                     vc.navigationItem.hidesBackButton = true
                     self.navigationController?.pushViewController(vc, animated: true)
